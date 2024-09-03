@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help | StayNest</title>
+    <link rel="stylesheet" href="help.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .help-container {
+        width: 100%;
+        max-width: 800px;
+        background-color: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
+    
+    h2 {
+        font-size: 22px;
+        color: #34495e;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #f0f2f5;
+        padding-bottom: 10px;
+    }
+    
+    .faq-section {
+        margin-bottom: 40px;
+    }
+    
+    .faq-item {
+        margin-bottom: 20px;
+    }
+    
+    .faq-item h3 {
+        font-size: 18px;
+        color: #2980b9;
+        margin-bottom: 8px;
+    }
+    
+    .faq-item p {
+        font-size: 16px;
+        color: #555;
+    }
+    
+    .chat-section {
+        margin-bottom: 40px;
+    }
+    
+    .chat-box {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    
+    .chat-message {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .bot-message {
+        justify-content: flex-start;
+    }
+    
+    .user-message {
+        justify-content: flex-end;
+    }
+    
+    .bot-message p,
+    .user-message p {
+        padding: 10px 15px;
+        border-radius: 10px;
+        max-width: 70%;
+    }
+    
+    .bot-message p {
+        background-color: #3498db;
+        color: white;
+        border-radius: 10px 10px 10px 0;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .user-message p {
+        background-color: #e0e0e0;
+        color: #333;
+        border-radius: 10px 10px 0 10px;
+    }
+    
+    .bot-message .chatme-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+    }
+    
+    .chat-input {
+        width: 80%;
+        padding: 10px;
+        border-radius: 30px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        outline: none;
+    }
+    
+    .send-button {
+        width: 18%;
+        padding: 10px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .send-button:hover {
+        background-color: #2980b9;
+    }
+    
+    .typing-dots {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-left: 2px;
+        background-color: white;
+        border-radius: 50%;
+        animation: typing 1s infinite ease-in-out;
+    }
+    
+    @keyframes typing {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .help-container {
+            width: 90%;
+            padding: 20px;
+        }
+    
+        h1 {
+            font-size: 24px;
+        }
+    
+        h2 {
+            font-size: 20px;
+        }
+    
+        .chat-input {
+            width: 75%;
+        }
+    
+        .send-button {
+            width: 23%;
+        }
+    }
+    
+</style>
+
+
+
+<body>
+    <div class="help-container">
+     
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I book a room on StayNest?</h3>
+                <p>You can book a room by searching for available rooms, selecting one, and following the steps for payment and confirmation. Make sure your account is verified to complete the process.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I cancel my booking?</h3>
+                <p>Yes, bookings can be canceled from your account dashboard. Please note that cancellation policies vary depending on the host's terms.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What payment methods are accepted?</h3>
+                <p>We accept credit cards, debit cards, UPI, and net banking for payments. All transactions are secure and encrypted for your safety.</p>
+            </div>
+        </div>
+
+        <!-- ChatMe AI Section -->
+        <div class="chat-section">
+            <h2>Chat with StayNest AI</h2>
+            <div class="chat-box" id="chat-box">
+                <div class="chat-message bot-message">
+                    <img src="https://png.pngtree.com/png-vector/20190324/ourlarge/pngtree-vector-female-student-icon-png-image_862309.jpg" alt="ChatMe AI Icon" class="chatme-icon">
+                    <p>Hi, I'm StayNest AI! How can I assist you today?</p>
+                </div>
+            </div>
+            <input type="text" id="chat-input" placeholder="Type your question..." class="chat-input">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const chatInput = document.getElementById("chat-input");
+            const chatBox = document.getElementById("chat-box");
+            const userMessage = chatInput.value.trim();
+
+            if (userMessage !== "") {
+                // Display user's message
+                const userMessageElement = document.createElement("div");
+                userMessageElement.classList.add("chat-message", "user-message");
+                userMessageElement.innerHTML = `<p>${userMessage}</p>`;
+                chatBox.appendChild(userMessageElement);
+
+                // Scroll to the bottom of chat
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Clear input field
+                chatInput.value = "";
+
+                // Simulate AI "typing" with dots
+                const typingMessageElement = document.createElement("div");
+                typingMessageElement.classList.add("chat-message", "bot-message");
+                typingMessageElement.innerHTML = `<img src="https://png.pngtree.com/png-vector/20190324/ourlarge/pngtree-vector-female-student-icon-png-image_862309.jpg" alt="ChatMe AI Icon" class="chatme-icon">
+                                                  <p><span class="typing-dots"></span><span class="typing-dots"></span><span class="typing-dots"></span></p>`;
+                chatBox.appendChild(typingMessageElement);
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Simulate bot response after delay
+                setTimeout(() => {
+                    chatBox.removeChild(typingMessageElement); // Remove typing dots
+                    const botResponse = getBotResponse(userMessage);
+                    const botMessageElement = document.createElement("div");
+                    botMessageElement.classList.add("chat-message", "bot-message");
+                    botMessageElement.innerHTML = `<img src="https://png.pngtree.com/png-vector/20190324/ourlarge/pngtree-vector-female-student-icon-png-image_862309.jpg" alt="ChatMe AI Icon" class="chatme-icon">
+                                                    <p>${botResponse}</p>`;
+                    chatBox.appendChild(botMessageElement);
+
+                    // Scroll to the bottom of chat
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1500); // 1.5 seconds delay before bot responds
+            }
+        }
+
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase();
+        
+            if (userMessage.includes("modify booking")) {
+                return "Modifications to bookings depend on the host's policy. You can check the modification options in your booking details section.";
+            } else if (userMessage.includes("contact")) {
+                return "Yes, you can reach out to our support team at +91 9876543210 or email us at support@staynest.com.";
+            } else if (userMessage.includes("payment method")) {
+                return "We accept credit cards, debit cards, UPI, and net banking for payments.";
+            } else if (userMessage.includes("cancel booking")) {
+                return "To cancel your booking, please visit your account dashboard, navigate to the 'My Bookings' section, and select the booking you wish to cancel. Keep in mind that cancellation policies vary by host, so review the terms before proceeding. If you need further assistance, contact our support team at +91 9876543210 or email us at support@staynest.com.";
+            } else {
+                return "I'm sorry, I didn't understand that. Could you please clarify your question?";
+            }
+        }
+        
+        
+        // Trigger sending message with Enter key
+        document.getElementById("chat-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

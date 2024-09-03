@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayNest - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head>
+<body>
+<style>
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f4f8; /* Light gray background for scrollbar track */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #323435; /* Deep blue for the scrollbar thumb */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #005f73; /* Darker blue on hover */
+}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        text-align: center;
+        padding: 50px;
+    }
+    
+    h1 {
+        font-size: 36px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+    }
+    
+    .chatme-trigger {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+    
+    .chatme-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease-in-out;
+    }
+    
+    .chatme-icon:hover {
+        transform: scale(1.1);
+    }
+    
+    /* ChatMe AI Popup Model */
+    .chatme-popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .chatme-popup-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        width: 80%;
+        max-width: 400px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+    
+    .close-popup {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    
+    .chatme-popup h2 {
+        font-size: 24px;
+        color: #3498db;
+        margin-bottom: 20px;
+    }
+    
+    .chatme-popup p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .chatme-popup button {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .chatme-popup button:hover {
+        background-color: #2980b9;
+    }
+    
+}
+
+/* Header */
+
+
+</style>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">StayNest</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+         
+                <div class="profile-actions">
+                    <a href="my-bookings.html" class="profile-button">My Bookings</a>
+                    <button onclick="logout()" class="profile-button">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Buyer/Seller Options -->
+        <section class="buyer-seller-options">
+        
+            <img src="https://img.freepik.com/premium-vector/rent-house-home-apartment-rental-online-digital-computer-flat-cartoon-illustration_212005-270.jpg" width="300" height="200">
+            <div class="role-options">
+                <div class="role-option">
+                    <h2>As a Buyer</h2>
+                    <p>Find the perfect room for your stay.</p>
+                    <button onclick="showBuyerForm()" class="role-button">Find a Room</button>
+                </div>
+                <div class="role-option">
+                    <h2>As a Seller</h2>
+                    <p>List your room for potential buyers.</p>
+                    <button onclick="showSellerForm()" class="role-button">List a Room</button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Buyer Form -->
+        <section id="buyer-form" class="form-section" style="display: none;">
+            <h2>Buyer Form</h2>
+            <form id="buyer-form-content" onsubmit="return handleBuyerForm()">
+                <div class="form-group">
+                    <label for="buyer-location">Location:</label>
+                    <input type="text" id="buyer-location" name="location" placeholder="Enter location" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyer-date">Check-in Date:</label>
+                    <input type="date" id="buyer-date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyer-time">Check-in Time:</label>
+                    <input type="time" id="buyer-time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="number-of-people">Number of People:</label>
+                    <input type="number" id="number-of-people" name="people" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="number-of-rooms">Number of Rooms:</label>
+                    <input type="number" id="number-of-rooms" name="rooms" min="1" required>
+                </div>
+                <button type="submit" class="submit-button">Search</button>
+            </form>
+        </section>
+
+        <!-- Seller Form -->
+        <section id="seller-form" class="form-section" style="display: none;">
+            <h2>Seller Form</h2>
+            <form id="seller-form-content" onsubmit="return handleSellerForm()">
+                <div class="form-group">
+                    <label for="seller-location">Location:</label>
+                    <input type="text" id="seller-location" name="location" placeholder="Enter location" required>
+                </div>
+                <div class="form-group">
+                    <label for="seller-contact">Contact</label>
+                    <input type="text" id="sellercontact" name="contact" placeholder="Enter number" required>
+                </div>
+                <div class="form-group">
+                    <label for="seller-price">Price:</label>
+                    <input type="number" id="seller-price" name="price"  placeholder="Rs" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="seller-room-description">Room Description:</label>
+                    <textarea id="seller-room-description" name="reviews" placeholder="Enter description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="seller-photos">Upload Photos:</label>
+                    <input type="file" id="seller-photos" name="photos" accept="image/*" multiple required>
+                </div>
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </section>
+
+
+        <!-- About Section -->
+        <section id="about" class="info-section1">
+            
+            <h1>About Us</h1>
+       <b>StayNest is committed to providing the best accommodation options for your travel needs. Our platform offers a wide selection of rooms with detailed descriptions, high-quality images, and real-time availability.</b>
+       <h3>
+         Welcome to StayNest, your trusted platform for finding quality rental spaces tailored for hostelers and PG students. We believe in making the search for comfortable, affordable, and well-located accommodation seamless and stress-free, so you can focus on your studies and personal growth. At StayNest, we connect students and professionals with verified hosts offering top-notch rooms and facilities, ensuring a simple, secure, and efficient process. Whether you're looking for a cozy hostel room, a private PG, or shared accommodations, we offer detailed listings with room photos, ratings, and reviews to help you make informed decisions. Our platform allows you to search and explore curated listings based on location, amenities, and budget, with verified properties and secure payment options for safe transactions. We also provide flexible booking options for both short and long-term stays, with no hidden fees. For hosts, we offer a streamlined onboarding process and marketing opportunities, ensuring their properties meet our quality standards. Beyond just finding accommodation, StayNest offers networking opportunities, special discounts, event hosting, and referral programs to enhance the living experience for hostelers and PG students. We aim to make your housing journey hassle-free, so you can focus on the experiences that matter most. Welcome to StayNest – your home away from home.</h3>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="info-section">
+            <h2>Contact Us</h2>
+            <p>Have questions or need assistance? Feel free to reach out to us via email or phone.</p>
+            <p>Email: support@staynest.com</p>
+            <p>Phone: +1 234 567 890</p>
+        </section>
+
+        <!-- Help Section -->
+        <section id="help" class="info-section">
+            <h2>Help Center</h2>
+            <p>Find answers to common questions in our Help Center. If you need further assistance, our support team is here to help.</p>
+            <a href="help.html" class="help-link">Visit Help Center</a>
+        </section>
+
+
+    <div class="chatme-trigger">
+        <img src="https://png.pngtree.com/png-vector/20190324/ourlarge/pngtree-vector-female-student-icon-png-image_862309.jpg" alt="ChatMe AI" onclick="openChatMePopup()" class="chatme-icon">
+    </div>
+
+    <!-- ChatMe AI Popup Modal -->
+    <div id="chatmePopup" class="chatme-popup">
+        <div class="chatme-popup-content">
+            <span class="close-popup" onclick="closeChatMePopup()">&times;</span>
+            <h2>Welcome to ChatMe AI!</h2>
+            <p>How can I assist you today?</p>
+            <button onclick="goToHelp()">Go to Help Center</button>
+        </div>
+    </div>
+
+    <script>
+        function openChatMePopup() {
+            document.getElementById('chatmePopup').style.display = 'block';
+        }
+
+        function closeChatMePopup() {
+            document.getElementById('chatmePopup').style.display = 'none';
+        }
+
+        function goToHelp() {
+            window.location.href = 'help.html';
+        }
+
+        // Close the popup if the user clicks outside of it
+        window.onclick = function(event) {
+            const popup = document.getElementById('chatmePopup');
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
